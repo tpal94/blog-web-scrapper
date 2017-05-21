@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Responser name:</strong>
+  <%= @response.responser_name %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @response.date %>
+</p>
+
+<p>
+  <strong>Read time:</strong>
+  <%= @response.read_time %>
+</p>
+
+<p>
+  <strong>Desciption:</strong>
+  <%= @response.desciption %>
+</p>
+
+<%= link_to 'Edit', edit_response_path(@response) %> |
+<%= link_to 'Back', responses_path %>

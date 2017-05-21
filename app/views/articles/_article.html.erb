@@ -1,0 +1,7 @@
+<div>
+  <h2><%= link_to article.tittle, article_path(article) %></h2>
+
+  <small><em><%= article.timestamp %></em></small>
+
+  <p><%= truncate(strip_tags(article.description), length: 600) %></p>
+</div>

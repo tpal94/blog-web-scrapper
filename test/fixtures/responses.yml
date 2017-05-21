@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  responser_name: MyString
+  date: MyString
+  read_time: MyString
+  desciption: MyString
+
+two:
+  responser_name: MyString
+  date: MyString
+  read_time: MyString
+  desciption: MyString
