@@ -1,21 +1,24 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :check_history, only: [:index]
+
 
   # GET /articles
   # GET /articles.json
  def index
-  binding.pry 
-    tag = Tag.where(name: params[:search]).first 
-    unless tag.present?
-      medium = Medium.new
-      result = medium.get_page_detail params[:search]
-      insert_fetched_detail(result)
+  #binding.pry 
+    unless @articles.present?
+      unless result.present?
+        medium = Medium.new
+        result = medium.get_page_detail params[:search]
+        insert_fetched_detail(result)
+      end
     end
-    @articles = Article.paginate(page: params[:page], per_page: 10).order('created_at DESC')
+    @articles = @articles.paginate(page: params[:page], per_page: 10).order('created_at DESC')
     respond_to do |format|
       format.html
-        format.js
-      end
+      format.js
+    end
 
  end
 
@@ -79,6 +82,13 @@ class ArticlesController < ApplicationController
   end
 
   private
+
+    def check_history
+       result = SearchHistory.where(search: params[:search]).first 
+        if result.present?
+          @articles = result.get_blog_search params[:page]
+       end
+    end
 
     def get_and_show_posts
       @articles = Article.paginate(page: params[:page], per_page: 15).order('created_at DESC')

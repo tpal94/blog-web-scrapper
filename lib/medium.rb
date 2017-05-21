@@ -5,6 +5,7 @@ require 'fileutils'
 
 BASE_URL = 'https://medium.com/'
 BASE_DIR = 'search?q='
+SEARCH_MORE = '/search/posts?q='
 class Medium
 
 
@@ -45,15 +46,15 @@ def get_blog_detail link
   return content
 end
 
-def get_more_page_detail tag,page
-  uri = URI.parse(BASE_URL+BASE_DIR)
-params = { :paging => {:next => {:page => page, :pageSize => 30}},:q => tag}
+def get_more_page_detail tag,page,ignore_ids
+  uri = URI.parse(BASE_URL+BASE_DIR+tag)
+  params = {:page => page, :pageSize => 10,ignore: ignore_ids}
 
-# Add params to URI
-uri.query = URI.encode_www_form(params)
+  # Add params to URI
+   uri.query = URI.encode_www_form(params)
 
 
-page = Nokogiri::HTML(open(uri))
+   page = Nokogiri::HTML(open(uri))
 
 
 
@@ -66,6 +67,7 @@ page = Nokogiri::HTML(open(uri))
 		content[:time_ago] = blog.css("div.postMetaInline").first.css("span.readingTime").last.values.last
 		content[:tittle] = blog.css("div.section-inner").first.css("blockquote").text
 		content[:decription] = blog.css("div.section-inner").first.css("p").text
+		content[:medium_id] = blog.css("div.js-actionRecommend").first.attr("data-post-id")
 		content[:link] = blog.css("div.postMetaInline-authorLockup").css("a").last.attr('href')
 		blogs << content
 	end
