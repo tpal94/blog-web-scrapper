@@ -7,7 +7,7 @@ class FetchBlogDetailJob < ApplicationJob
      response = medium.get_blog_detail article.link
      article.update_attributes(html_context: response[:html_content])
      response[:tags].each do |tag|
-     	article.tags.create(name: )
+     	article.tags.create(name: tag)
      end 
     end 
     # Do something later
