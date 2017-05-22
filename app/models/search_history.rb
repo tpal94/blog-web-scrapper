@@ -4,13 +4,11 @@ class SearchHistory < ApplicationRecord
 
 
 	def get_blog_search page
-		 if self.is_fetching_required? page
-		   processor = Processor.new(page: page,blog_search_id: blog_search_id,history_search_id: id,search_text: search)
-       processor.fetch_more_blog      
-     end
-
-
-		 Article.where(id: self.blog_search.blogs_id)
+  	if self.is_fetching_required? page
+  	  processor = Processor.new(page: page,blog_search_id: blog_search_id,history_search_id: id,search_text: search)
+      processor.fetch_more_blog      
+    end
+    return Article.where(id: self.blog_search.blogs_id)
   end
 
   def is_fetching_required?

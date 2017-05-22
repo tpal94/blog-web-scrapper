@@ -11,7 +11,9 @@ class ArticlesController < ApplicationController
       unless result.present?
         medium = Medium.new
         result = medium.get_page_detail params[:search]
-        insert_fetched_detail(result)
+        process = Processor.new(search_text: params[:search],page: 1)
+        process.insert_fetched_detail(result)
+
       end
     end
     @articles = @articles.paginate(page: params[:page], per_page: 10).order('created_at DESC')
@@ -22,12 +24,7 @@ class ArticlesController < ApplicationController
 
  end
 
-  def index_with_button
-      get_and_show_posts
-  end
-
-
-  # GET /articles/1
+ # GET /articles/1
   # GET /articles/1.json
   def show
   end
@@ -85,18 +82,11 @@ class ArticlesController < ApplicationController
 
     def check_history
        result = SearchHistory.where(search: params[:search]).first 
-        if result.present?
+        if result.present? 
           @articles = result.get_blog_search params[:page]
        end
     end
 
-    def get_and_show_posts
-      @articles = Article.paginate(page: params[:page], per_page: 15).order('created_at DESC')
-      respond_to do |format|
-          format.html
-          format.js
-      end
-    end
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.find(params[:id])

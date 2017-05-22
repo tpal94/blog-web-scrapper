@@ -49,15 +49,9 @@ end
 def get_more_page_detail tag,page,ignore_ids
   uri = URI.parse(BASE_URL+BASE_DIR+tag)
   params = {:page => page, :pageSize => 10,ignore: ignore_ids}
-
-  # Add params to URI
+   # Add params to URI
    uri.query = URI.encode_www_form(params)
-
-
    page = Nokogiri::HTML(open(uri))
-
-
-
   #page = Nokogiri::HTML(open(BASE_URL+BASE_DIR + tag))
   blogs = []
   page.css("div.u-paddingTop20").each do |blog|
