@@ -16,3 +16,10 @@
         </div>
     </div>
 </div>
+
+<% @searches.each do |search| %>
+      <tr>
+        <td><%= search.search %></td>
+        <td><%= search.blog_search.blogs_id  %></td>
+      </tr>
+    <% end %>

@@ -4,4 +4,19 @@
   <small><em><%= article.timestamp %></em></small>
 
   <p><%= truncate(strip_tags(article.description), length: 600) %></p>
+
+  <p><p>
+  <strong>Author:</strong>
+  <%= article.author.name %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= article.date %>
+</p>
+
+<p>
+  <strong>Time ago:</strong>
+  <%= article.time_ago %>
+</p></p>
 </div>
