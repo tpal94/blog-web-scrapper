@@ -8,7 +8,7 @@ class ArticlesController < ApplicationController
  def index
   #binding.pry 
     unless @articles.present?
-      unless result.present?
+      unless @result.present?
         medium = Medium.new
         result = medium.get_page_detail params[:search]
         process = Processor.new(search_text: params[:search],page: 1)
@@ -81,8 +81,8 @@ class ArticlesController < ApplicationController
   private
 
     def check_history
-       result = SearchHistory.where(search: params[:search]).first 
-        if result.present? 
+       @result = SearchHistory.where(search: params[:search]).first 
+        if @result.present? 
           @articles = result.get_blog_search params[:page]
        end
     end
