@@ -11,7 +11,9 @@ class ArticlesController < ApplicationController
       unless @result.present?
         medium = Medium.new
         result = medium.get_page_detail params[:search]
-        process = Processor.new(search_text: params[:search],page: 1)
+        process = Processor.new
+        process.search_text = params[:search]
+        process.page = 1
         process.insert_fetched_detail(result)
 
       end
@@ -83,7 +85,7 @@ class ArticlesController < ApplicationController
     def check_history
        @result = SearchHistory.where(search: params[:search]).first 
         if @result.present? 
-          @articles = result.get_blog_search params[:page]
+          @articles = @result.get_blog_search params[:page]
        end
     end
 

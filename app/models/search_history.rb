@@ -11,7 +11,8 @@ class SearchHistory < ApplicationRecord
     return Article.where(id: self.blog_search.blogs_id)
   end
 
-  def is_fetching_required?
-  	!self.blog_search.blogs_id.size.between?((page-1)*10, page*10)  
+  def is_fetching_required? page
+    binding.pry 
+  	!self.blog_search.blogs_id.size.between?((page.to_i-1)*10, page.to_i*10)  
   end
 end

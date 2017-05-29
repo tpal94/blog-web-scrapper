@@ -39,8 +39,8 @@ class Processor
         blogs << blog 
        end
        articles = Article.create(blogs) 
-       blog_search = BlogSearch.create(search: self.search_text,blogs_id: articles.pluck(:id))
-       history_search = HistorySearch.create(search: self.search_text,blog_search_id: blog_search.id)
+       blog_search = BlogSearch.create(text: self.search_text,blogs_id: articles.pluck(:id))
+       history_search = SearchHistory.create(search: self.search_text,blog_search_id: blog_search.id)
        FetchBlogDetailJob.perform_later(articles, blog_search)
     end 
   end
