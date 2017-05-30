@@ -1,22 +1,14 @@
-<div>
-  <h2><%= link_to article.tittle, article_path(article) %></h2>
-
-  <small><em><%= article.timestamp %></em></small>
-
-  <p><%= truncate(strip_tags(article.description), length: 600) %></p>
-
-  <p><p>
-  <strong>Author:</strong>
-  <%= article.author.name %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= article.date %>
-</p>
-
-<p>
-  <strong>Time ago:</strong>
-  <%= article.time_ago %>
-</p></p>
-</div>
+<hr>
+  <div class="row">
+    <div class="col-sm-4"><a href="<%= article_path(article)%>" class=""><img src="http://placehold.it/1280X720" class="img-responsive"></a>
+    </div>
+    <div class="col-sm-8">
+      <h3 class="title"> <%= article.tittle %></h3>
+      <p class="text-muted"><span class="glyphicon glyphicon-lock"></span><%= article.date %>,<%= article.time_ago %></p>
+      <p><%= truncate(strip_tags(article.description), length: 600) %></p>
+      
+      <p class="text-muted">Presented by <a href="#"><%= article.author.name %></a></p>
+      
+    </div>
+  </div>
+<hr>

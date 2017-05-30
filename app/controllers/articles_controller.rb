@@ -14,8 +14,7 @@ class ArticlesController < ApplicationController
         process = Processor.new
         process.search_text = params[:search]
         process.page = 1
-        process.insert_fetched_detail(result)
-
+        @articles = process.insert_fetched_detail(result)
       end
     end
     @articles = @articles.paginate(page: params[:page], per_page: 10).order('created_at DESC')

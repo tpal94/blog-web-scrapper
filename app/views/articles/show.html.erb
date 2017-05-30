@@ -37,11 +37,11 @@
 
 <p>
   <strong>Tag:</strong>
-  <%= @article.tag %>
+  <%= @article.tags.map{|p| p.name } %>
 </p>
 
 <p>
-  <strong>Tag:</strong>
+  <strong>HTML context:</strong>
   <%= @article.html_context %>
 </p>
 

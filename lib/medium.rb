@@ -23,8 +23,8 @@ def get_page_detail tag
 		content[:author] = blog.css("div.postMetaInline").first.css("a.link--darken").first.text
 		content[:time] = blog.css("div.postMetaInline").first.css("time").text
 		content[:time_ago] = blog.css("div.postMetaInline").first.css("span.readingTime").last.values.last
-		content[:tittle] = blog.css("div.section-inner").first.css("blockquote").text
-		content[:decription] = blog.css("div.section-inner").first.css("p").text
+		content[:tittle] = blog.css("div.section-inner").first.css("h3").text
+		content[:description] = blog.css("div.section-inner").first.css("p").text
 		content[:medium_id] = blog.css("div.js-actionRecommend").first.attr("data-post-id")
 		content[:link] = blog.css("div.postMetaInline-authorLockup").css("a").last.attr('href')
 		blogs << content
@@ -60,7 +60,7 @@ def get_more_page_detail tag,page,ignore_ids
 		content[:time] = blog.css("div.postMetaInline").first.css("time").text
 		content[:time_ago] = blog.css("div.postMetaInline").first.css("span.readingTime").last.values.last
 		content[:tittle] = blog.css("div.section-inner").first.css("blockquote").text
-		content[:decription] = blog.css("div.section-inner").first.css("p").text
+		content[:description] = blog.css("div.section-inner").first.css("p").text
 		content[:medium_id] = blog.css("div.js-actionRecommend").first.attr("data-post-id")
 		content[:link] = blog.css("div.postMetaInline-authorLockup").css("a").last.attr('href')
 		blogs << content

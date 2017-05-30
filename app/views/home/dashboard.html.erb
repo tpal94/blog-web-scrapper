@@ -17,9 +17,17 @@
     </div>
 </div>
 
-<% @searches.each do |search| %>
-      <tr>
-        <td><%= search.search %></td>
-        <td><%= search.blog_search.blogs_id  %></td>
-      </tr>
-    <% end %>
+
+<div class="list-group">
+<% @searches.reverse.each do |search| %>
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= search.search %></h5>
+      <small><%= time_ago_in_words(search.created_at)%></small>
+    </div>
+    <p class="mb-1"><%= Article.where(id: search.blog_search.blogs_id).pluck(:tittle) %></p>
+  </a>
+ <% end %>
+</div>
+
+  
